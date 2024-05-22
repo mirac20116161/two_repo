@@ -1,13 +1,27 @@
-import random
+import discord
+from discord.ext import commands
 
-karakter = "+-/*!&$#?=@abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+intents = discord.Intents.default()
+intents.message_content = True
 
-sayi  = int(input("kaç harfli şifere istersin: "))
-parola = ""
+bot = commands.Bot(command_prefix='$', intents=intents)
 
+@bot.event
+async def on_ready():
+    print(f'{bot.user} olarak giriş yaptık')
 
-for i in range(sayi):
-    parola += random.choice(karakter)
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Merhaba! Ben {bot.user}, bir Discord sohbet botuyum!')
 
+@bot.command()
+async def heh(ctx, count_heh = 5):
+    await ctx.send("he" * count_heh)
 
-print("oluşturulan şifre",parola) 
+@bot.command()
+async def naber(ctx):
+    await ctx.send('iyi sen')
+
+@bot.command()
+async def kolaysin(ctx):
+    await ctx.send('sen öyle san!')
